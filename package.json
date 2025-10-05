@@ -14,7 +14,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.22"
+    "@mdi/font": "^7.4.47",
+    "vue": "^3.5.22",
+    "vuetify": "^3.10.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
@@ -28,6 +30,6 @@
     "vite-plugin-vue-devtools": "^8.0.2"
   },
   "optionalDependencies": {
-  "@rollup/rollup-linux-x64-gnu": "^4.9.6"
-}
+    "@rollup/rollup-linux-x64-gnu": "^4.9.6"
+  }
 }
