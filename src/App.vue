@@ -326,6 +326,7 @@ export default {
   justify-content: center;
   width: 100%;
   text-align: center;
+  padding: 0 4px;
 }
 
 .option-text {
@@ -334,6 +335,7 @@ export default {
   line-height: 1.4;
   word-wrap: break-word;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .score {
@@ -401,7 +403,7 @@ export default {
   align-items: center;
   justify-content: center;
   text-transform: none;
-  padding: 16px 12px;
+  padding: 16px 8px;
   border: 2px solid #e0e0e0;
   transition: all 0.3s ease;
   font-family: 'Lora', serif;
@@ -409,6 +411,7 @@ export default {
   background-color: white;
   min-height: 90px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .option-default {
@@ -470,41 +473,57 @@ export default {
     padding: 12px 8px;
   }
   
+  .paris-sheet {
+    margin: 0 4px;
+  }
+  
   .paris-title {
     font-size: 2rem;
     line-height: 1.2;
+    padding: 0 8px;
   }
   
   .paris-subtitle {
     font-size: 1.1rem;
     margin-bottom: 12px;
+    padding: 0 8px;
   }
   
   .paris-question {
     font-size: 1.3rem;
     line-height: 1.3;
     margin-bottom: 16px;
+    padding: 0 8px;
   }
   
   .options-container {
     gap: 10px;
+    padding: 0 4px;
   }
   
   .option-btn {
     min-height: 100px;
-    padding: 14px 10px;
+    padding: 12px 6px;
     border-radius: 8px;
+    margin: 0 2px;
   }
   
   .paris-option {
     flex-direction: column;
     gap: 6px;
+    padding: 0 8px;
+    width: calc(100% - 16px);
   }
   
   .option-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.3;
     margin-bottom: 6px;
+    padding: 0 4px;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
   
   .score {
@@ -514,41 +533,52 @@ export default {
   .paris-result {
     font-size: 1.3rem;
     line-height: 1.3;
+    padding: 0 12px;
   }
   
   .snob, .râleur, .touriste {
     font-size: 1.1rem;
     line-height: 1.3;
-    padding: 0 8px;
+    padding: 0 12px;
   }
   
   .next-btn, .action-btn {
     font-size: 0.9rem;
     min-height: 48px;
+    margin: 0 8px;
   }
 }
 
 /* Pour les très petits écrans */
 @media (max-width: 360px) {
   .paris-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
+    padding: 0 12px;
   }
   
   .paris-question {
     font-size: 1.1rem;
+    padding: 0 12px;
   }
   
   .option-btn {
     min-height: 110px;
-    padding: 12px 8px;
+    padding: 10px 4px;
+    margin: 0 1px;
   }
   
   .option-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 0 6px;
   }
   
   .score {
     font-size: 0.75rem;
+  }
+  
+  .paris-option {
+    padding: 0 6px;
+    width: calc(100% - 12px);
   }
 }
 
@@ -560,11 +590,26 @@ export default {
   
   .option-btn {
     min-height: 80px;
-    padding: 10px 8px;
+    padding: 8px 4px;
   }
   
   .option-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
+  
+  .paris-option {
+    padding: 0 6px;
+  }
+}
+
+/* Correction spécifique pour éviter le débordement */
+.v-btn__content {
+  width: 100%;
+  max-width: 100%;
+}
+
+:deep(.v-btn__content) {
+  width: 100%;
+  max-width: 100%;
 }
 </style>
