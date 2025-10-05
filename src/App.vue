@@ -39,9 +39,9 @@
                         @click="selectAnswer(index)"
                       >
                         <span class="paris-option">
-                          {{ option.text }}
-                          <span class="score">({{ option.score }} pts)</span>
-                        </span>
+  <span class="option-text">{{ option.text }}</span>
+  <span class="score">({{ option.score }} pts)</span>
+</span>
                       </v-btn>
                     </div>
                     
@@ -320,9 +320,17 @@ export default {
 }
 
 .paris-option {
-  font-family: 'Lora', serif;
-  font-size: 1.1rem;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.option-text {
+  display: block;
+  margin-bottom: 4px;
   line-height: 1.4;
   word-wrap: break-word;
   width: 100%;
@@ -331,7 +339,6 @@ export default {
 .score {
   color: #8B0000;
   font-size: 0.9rem;
-  margin-left: 8px;
   white-space: nowrap;
 }
 
@@ -392,7 +399,7 @@ export default {
 .option-btn {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   text-transform: none;
   padding: 16px 12px;
   border: 2px solid #e0e0e0;
@@ -400,7 +407,7 @@ export default {
   font-family: 'Lora', serif;
   cursor: pointer;
   background-color: white;
-  min-height: 80px;
+  min-height: 90px;
   width: 100%;
 }
 
@@ -484,24 +491,24 @@ export default {
   }
   
   .option-btn {
-    min-height: 85px;
+    min-height: 100px;
     padding: 14px 10px;
     border-radius: 8px;
   }
   
   .paris-option {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .option-text {
     font-size: 1rem;
     line-height: 1.3;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
+    margin-bottom: 6px;
   }
   
   .score {
     font-size: 0.8rem;
-    margin-left: 0;
   }
   
   .paris-result {
@@ -519,25 +526,29 @@ export default {
     font-size: 0.9rem;
     min-height: 48px;
   }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 360px) {
+  .paris-title {
+    font-size: 1.8rem;
+  }
   
-  /* Pour les très petits écrans */
-  @media (max-width: 360px) {
-    .paris-title {
-      font-size: 1.8rem;
-    }
-    
-    .paris-question {
-      font-size: 1.1rem;
-    }
-    
-    .option-btn {
-      min-height: 90px;
-      padding: 12px 8px;
-    }
-    
-    .paris-option {
-      font-size: 0.9rem;
-    }
+  .paris-question {
+    font-size: 1.1rem;
+  }
+  
+  .option-btn {
+    min-height: 110px;
+    padding: 12px 8px;
+  }
+  
+  .option-text {
+    font-size: 0.9rem;
+  }
+  
+  .score {
+    font-size: 0.75rem;
   }
 }
 
@@ -548,11 +559,11 @@ export default {
   }
   
   .option-btn {
-    min-height: 70px;
+    min-height: 80px;
     padding: 10px 8px;
   }
   
-  .paris-option {
+  .option-text {
     font-size: 0.9rem;
   }
 }
