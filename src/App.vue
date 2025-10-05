@@ -288,7 +288,7 @@ export default {
 .paris-bg {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/paris-bg-CnVnKUmc.jpg') no-repeat center/cover fixed;
   min-height: 100vh;
-  padding-top: 24px;
+  padding: 16px 12px;
   background-color: #1E3A8A;
 }
 
@@ -316,18 +316,23 @@ export default {
   font-family: 'Lora', serif;
   font-size: 1.5rem;
   text-align: center;
+  line-height: 1.3;
 }
 
 .paris-option {
   font-family: 'Lora', serif;
   font-size: 1.1rem;
   text-align: left;
+  line-height: 1.4;
+  word-wrap: break-word;
+  width: 100%;
 }
 
 .score {
   color: #8B0000;
   font-size: 0.9rem;
   margin-left: 8px;
+  white-space: nowrap;
 }
 
 .question-sheet {
@@ -389,12 +394,14 @@ export default {
   align-items: center;
   justify-content: flex-start;
   text-transform: none;
-  padding: 12px 16px;
+  padding: 16px 12px;
   border: 2px solid #e0e0e0;
   transition: all 0.3s ease;
   font-family: 'Lora', serif;
   cursor: pointer;
   background-color: white;
+  min-height: 80px;
+  width: 100%;
 }
 
 .option-default {
@@ -450,26 +457,103 @@ export default {
   justify-content: center;
 }
 
-@media (max-width: 600px) {
+/* CORRECTIONS POUR MOBILE */
+@media (max-width: 768px) {
+  .paris-bg {
+    padding: 12px 8px;
+  }
+  
   .paris-title {
     font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .paris-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
   }
   
   .paris-question {
     font-size: 1.3rem;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  
+  .options-container {
+    gap: 10px;
+  }
+  
+  .option-btn {
+    min-height: 85px;
+    padding: 14px 10px;
+    border-radius: 8px;
   }
   
   .paris-option {
     font-size: 1rem;
+    line-height: 1.3;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .score {
+    font-size: 0.8rem;
+    margin-left: 0;
+  }
+  
+  .paris-result {
+    font-size: 1.3rem;
+    line-height: 1.3;
+  }
+  
+  .snob, .râleur, .touriste {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    padding: 0 8px;
+  }
+  
+  .next-btn, .action-btn {
+    font-size: 0.9rem;
+    min-height: 48px;
+  }
+  
+  /* Pour les très petits écrans */
+  @media (max-width: 360px) {
+    .paris-title {
+      font-size: 1.8rem;
+    }
+    
+    .paris-question {
+      font-size: 1.1rem;
+    }
+    
+    .option-btn {
+      min-height: 90px;
+      padding: 12px 8px;
+    }
+    
+    .paris-option {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* Pour les écrans en mode paysage mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .paris-bg {
+    padding: 8px 6px;
   }
   
   .option-btn {
     min-height: 70px;
-    padding: 10px 12px;
+    padding: 10px 8px;
   }
   
-  .snob, .râleur, .touriste {
-    font-size: 1.2rem;
+  .paris-option {
+    font-size: 0.9rem;
   }
 }
 </style>
