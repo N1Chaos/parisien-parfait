@@ -27,22 +27,19 @@
                       Question {{ currentQuestionIndex + 1 }} : {{ currentQuestion.text }}
                     </h2>
                     
+                    <!-- SECTION DES OPTIONS CORRIGÉE -->
                     <div class="options-container mt-4">
-                      <v-btn
+                      <button
                         v-for="(option, index) in currentQuestion.options"
                         :key="index"
                         :class="['option-btn', selectedAnswer === index ? 'option-selected' : 'option-default']"
-                        variant="outlined"
-                        block
-                        height="auto"
-                        min-height="60px"
                         @click="selectAnswer(index)"
                       >
-                        <span class="paris-option">
-  <span class="option-text">{{ option.text }}</span>
-  <span class="score">({{ option.score }} pts)</span>
-</span>
-                      </v-btn>
+                        <div class="option-content">
+                          <span class="option-text">{{ option.text }}</span>
+                          <span class="option-score">({{ option.score }} pts)</span>
+                        </div>
+                      </button>
                     </div>
                     
                     <v-alert 
@@ -288,13 +285,14 @@ export default {
 .paris-bg {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/assets/paris-bg-CnVnKUmc.jpg') no-repeat center/cover fixed;
   min-height: 100vh;
-  padding: 16px 12px;
+  padding: 16px 8px;
   background-color: #1E3A8A;
 }
 
 .paris-sheet {
   background: rgba(255, 253, 208, 0.95);
   border-radius: 16px;
+  overflow: hidden;
 }
 
 .paris-title {
@@ -319,31 +317,77 @@ export default {
   line-height: 1.3;
 }
 
-.paris-option {
+/* STYLES DES OPTIONS - VERSION SIMPLIFIÉE */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.option-btn {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px 8px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Lora', serif;
+}
+
+.option-default {
+  background-color: white;
+  color: #2c3e50;
+  border: 2px solid #e0e0e0;
+}
+
+.option-selected {
+  background-color: #8B0000 !important;
+  color: white !important;
+  border: 2px solid #8B0000 !important;
+}
+
+.option-btn:hover {
+  border-color: #8B0000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  text-align: center;
   padding: 0 4px;
 }
 
 .option-text {
-  display: block;
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  line-height: 1.3;
+  text-align: center;
   margin-bottom: 4px;
-  line-height: 1.4;
-  word-wrap: break-word;
   width: 100%;
-  box-sizing: border-box;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
-.score {
+.option-score {
   color: #8B0000;
+  font-family: 'Lora', serif;
   font-size: 0.9rem;
-  white-space: nowrap;
+  text-align: center;
 }
 
+/* Reste du CSS inchangé */
 .question-sheet {
   background: #FFFDD0;
   border-left: 6px solid #8B0000;
@@ -392,46 +436,6 @@ export default {
   font-size: 1rem;
 }
 
-.options-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.option-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-transform: none;
-  padding: 16px 8px;
-  border: 2px solid #e0e0e0;
-  transition: all 0.3s ease;
-  font-family: 'Lora', serif;
-  cursor: pointer;
-  background-color: white;
-  min-height: 90px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.option-default {
-  background-color: white;
-  color: #2c3e50;
-  border: 2px solid #e0e0e0;
-}
-
-.option-selected {
-  background-color: #8B0000 !important;
-  color: white !important;
-  border: 2px solid #8B0000 !important;
-}
-
-.option-btn:hover {
-  border-color: #8B0000;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .animate-title {
   animation: fadeIn 1s ease-in;
 }
@@ -451,165 +455,110 @@ export default {
   opacity: 0;
 }
 
-.gap-2 {
-  gap: 8px;
-}
-
-.d-flex {
-  display: flex;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-/* CORRECTIONS POUR MOBILE */
+/* CORRECTIONS MOBILE RADICALES */
 @media (max-width: 768px) {
   .paris-bg {
-    padding: 12px 8px;
+    padding: 8px 4px;
   }
   
   .paris-sheet {
-    margin: 0 4px;
+    margin: 0;
+    padding: 12px 8px !important;
   }
   
   .paris-title {
-    font-size: 2rem;
-    line-height: 1.2;
+    font-size: 1.7rem;
     padding: 0 8px;
   }
   
   .paris-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: 0.95rem;
     padding: 0 8px;
   }
   
   .paris-question {
-    font-size: 1.3rem;
-    line-height: 1.3;
-    margin-bottom: 16px;
+    font-size: 1.1rem;
     padding: 0 8px;
+    margin-bottom: 16px;
   }
   
   .options-container {
-    gap: 10px;
-    padding: 0 4px;
+    gap: 8px;
+    width: 100%;
   }
   
   .option-btn {
-    min-height: 100px;
-    padding: 12px 6px;
-    border-radius: 8px;
-    margin: 0 2px;
+    min-height: 85px;
+    padding: 10px 6px;
+    margin: 0;
+    width: 100%;
   }
   
-  .paris-option {
-    flex-direction: column;
-    gap: 6px;
-    padding: 0 8px;
-    width: calc(100% - 16px);
+  .option-content {
+    padding: 0 2px;
+    width: 100%;
   }
   
   .option-text {
-    font-size: 0.95rem;
-    line-height: 1.3;
-    margin-bottom: 6px;
-    padding: 0 4px;
-    word-break: break-word;
-    hyphens: auto;
-    max-width: 100%;
-    overflow-wrap: break-word;
+    font-size: 0.88rem;
+    line-height: 1.2;
+    padding: 0 2px;
   }
   
-  .score {
-    font-size: 0.8rem;
-  }
-  
-  .paris-result {
-    font-size: 1.3rem;
-    line-height: 1.3;
-    padding: 0 12px;
-  }
-  
-  .snob, .râleur, .touriste {
-    font-size: 1.1rem;
-    line-height: 1.3;
-    padding: 0 12px;
+  .option-score {
+    font-size: 0.75rem;
   }
   
   .next-btn, .action-btn {
+    min-height: 44px;
     font-size: 0.9rem;
-    min-height: 48px;
-    margin: 0 8px;
   }
 }
 
 /* Pour les très petits écrans */
 @media (max-width: 360px) {
+  .paris-bg {
+    padding: 6px 2px;
+  }
+  
+  .paris-sheet {
+    padding: 10px 6px !important;
+  }
+  
   .paris-title {
-    font-size: 1.7rem;
-    padding: 0 12px;
+    font-size: 1.5rem;
   }
   
   .paris-question {
-    font-size: 1.1rem;
-    padding: 0 12px;
+    font-size: 1rem;
   }
   
   .option-btn {
-    min-height: 110px;
-    padding: 10px 4px;
-    margin: 0 1px;
-  }
-  
-  .option-text {
-    font-size: 0.85rem;
-    padding: 0 6px;
-  }
-  
-  .score {
-    font-size: 0.75rem;
-  }
-  
-  .paris-option {
-    padding: 0 6px;
-    width: calc(100% - 12px);
-  }
-}
-
-/* Pour les écrans en mode paysage mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-  .paris-bg {
-    padding: 8px 6px;
-  }
-  
-  .option-btn {
-    min-height: 80px;
+    min-height: 90px;
     padding: 8px 4px;
   }
   
   .option-text {
-    font-size: 0.85rem;
-  }
-  
-  .paris-option {
-    padding: 0 6px;
+    font-size: 0.82rem;
   }
 }
 
-/* Correction spécifique pour éviter le débordement */
-.v-btn__content {
-  width: 100%;
-  max-width: 100%;
+/* OVERRIDE COMPLET DES STYLES VUETIFY POUR LES BOUTONS */
+:deep(.v-btn) {
+  min-width: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 :deep(.v-btn__content) {
-  width: 100%;
-  max-width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 !important;
+}
+
+:deep(.v-btn--block) {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 </style>
