@@ -52,19 +52,15 @@
                       {{ errorMessage }}
                     </v-alert>
                     
-                    <v-btn
-                      color="red-darken-2"
-                      variant="flat"
-                      rounded
-                      @click="nextQuestion"
+                    <!-- BOUTON SUIVANT NATIF -->
+                    <button
+                      class="next-btn-native"
                       :disabled="selectedAnswer === null"
-                      class="mt-4 next-btn"
-                      size="large"
-                      block
+                      @click="nextQuestion"
                     >
-                      <v-icon start>mdi-arrow-right</v-icon>
+                      <span>→</span>
                       Suivant
-                    </v-btn>
+                    </button>
                   </v-sheet>
                 </div>
                 
@@ -72,42 +68,28 @@
                   <v-sheet elevation="2" class="result-sheet pa-4" rounded="lg">
                     <h2 class="paris-result">Ton score : {{ score }} / {{ maxScore }}</h2>
                     <p v-if="score >= 36" class="snob">
-                      <v-icon color="red-darken-2" start>mdi-crown</v-icon>
+                      <span class="icon">👑</span>
                       Snob du Marais : tu juges même les croissants !
                     </p>
                     <p v-else-if="score >= 18" class="râleur">
-                      <v-icon color="blue-darken-2" start>mdi-coffee</v-icon>
+                      <span class="icon">☕</span>
                       Râleur Sympa : un Parisien en devenir.
                     </p>
                     <p v-else class="touriste">
-                      <v-icon color="grey-darken-1" start>mdi-map-marker</v-icon>
+                      <span class="icon">🗺️</span>
                       Touriste Perdu : Paris te snobe encore !
                     </p>
                     
-                    <div class="mt-4 d-flex flex-wrap gap-2 justify-center">
-                      <v-btn 
-                        color="red-darken-2" 
-                        variant="flat" 
-                        rounded 
-                        @click="resetQuiz"
-                        size="large"
-                        class="action-btn"
-                      >
-                        <v-icon start>mdi-replay</v-icon>
+                    <!-- BOUTONS D'ACTION NATIFS -->
+                    <div class="action-buttons-container mt-4">
+                      <button class="action-btn-native reset-btn" @click="resetQuiz">
+                        <span>🔄</span>
                         Recommencer
-                      </v-btn>
-                      <v-btn
-                        color="blue-darken-2"
-                        variant="outlined"
-                        rounded
-                        :href="shareUrl"
-                        target="_blank"
-                        size="large"
-                        class="action-btn"
-                      >
-                        <v-icon start>mdi-twitter</v-icon>
+                      </button>
+                      <a class="action-btn-native share-btn" :href="shareUrl" target="_blank">
+                        <span>🐦</span>
                         Partager sur X
-                      </v-btn>
+                      </a>
                     </div>
                   </v-sheet>
                 </div>
@@ -406,34 +388,95 @@ export default {
   font-family: 'Lora', serif;
 }
 
-.snob {
-  color: #8B0000;
+.snob, .râleur, .touriste {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-family: 'Lora', serif;
   font-weight: bold;
   font-size: 1.4rem;
   text-align: center;
+  margin: 16px 0;
+}
+
+.snob {
+  color: #8B0000;
 }
 
 .râleur {
   color: #1E3A8A;
-  font-family: 'Lora', serif;
-  font-weight: bold;
-  font-size: 1.4rem;
-  text-align: center;
 }
 
 .touriste {
   color: #4B5563;
-  font-family: 'Lora', serif;
-  font-weight: bold;
-  font-size: 1.4rem;
-  text-align: center;
 }
 
-.next-btn, .action-btn {
-  text-transform: none;
+.icon {
+  font-size: 1.6rem;
+}
+
+/* BOUTONS NATIFS POUR LE CENTRAGE PARFAIT */
+.next-btn-native, .action-btn-native {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
   font-family: 'Lora', serif;
   font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-top: 16px;
+}
+
+.next-btn-native {
+  background-color: #b71c1c;
+  color: white;
+}
+
+.next-btn-native:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.action-buttons-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.action-btn-native {
+  flex: 1;
+  min-height: 48px;
+}
+
+.reset-btn {
+  background-color: #b71c1c;
+  color: white;
+}
+
+.share-btn {
+  background-color: transparent;
+  color: #0d47a1;
+  border: 2px solid #0d47a1;
+}
+
+.next-btn-native:hover:not(:disabled),
+.reset-btn:hover {
+  background-color: #8B0000;
+  transform: translateY(-2px);
+}
+
+.share-btn:hover {
+  background-color: #0d47a1;
+  color: white;
 }
 
 .animate-title {
@@ -509,9 +552,24 @@ export default {
     font-size: 0.75rem;
   }
   
-  .next-btn, .action-btn {
+  .next-btn-native, .action-btn-native {
     min-height: 44px;
     font-size: 0.9rem;
+    gap: 6px;
+  }
+  
+  .action-buttons-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .snob, .râleur, .touriste {
+    font-size: 1.1rem;
+    gap: 6px;
+  }
+  
+  .icon {
+    font-size: 1.4rem;
   }
 }
 
@@ -541,24 +599,11 @@ export default {
   .option-text {
     font-size: 0.82rem;
   }
-}
-
-/* OVERRIDE COMPLET DES STYLES VUETIFY POUR LES BOUTONS */
-:deep(.v-btn) {
-  min-width: auto !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-:deep(.v-btn__content) {
-  width: 100% !important;
-  max-width: 100% !important;
-  flex: 1 !important;
-}
-
-:deep(.v-btn--block) {
-  width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+  
+  .next-btn-native, .action-btn-native {
+    min-height: 42px;
+    font-size: 0.85rem;
+    gap: 4px;
+  }
 }
 </style>
